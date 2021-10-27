@@ -1,0 +1,753 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Catallaxy Services | Saving Your Wallet from the Cloud</title>
+
+		<link rel="stylesheet" href="../reveal.js/dist/reset.css">
+		<link rel="stylesheet" href="../reveal.js/dist/reveal.css">
+		<link rel="stylesheet" href="../reveal.js/dist/theme/black.css" id="theme">
+		<link rel="stylesheet" href="../WebsiteAssets/mods.css">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="../reveal.js/plugin/highlight/monokai.css" id="highlight-theme">
+		
+		<script>
+		  Reveal.initialize({
+			math: {
+			  mathjax: 'https://cdn.jsdelivr.net/gh/mathjax/mathjax@2.7.8/MathJax.js',
+			  config: 'TeX-AMS_HTML-full',
+			  // pass other options into `MathJax.Hub.Config()`
+			  TeX: { Macros: { RR: "{\\bf R}" } }
+			},
+			plugins: [ RevealMath ]
+		  });
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section data-background-image="presentation/assets/image/Bubbles.jpg" data-background-opacity="0.4">
+					<h2>Saving Your Wallet from the Cloud</h2>
+					
+					<a href="https://www.catallaxyservices.com">Kevin Feasel</a> (<a href="https://twitter.com/feaselkl">@feaselkl</a>)<br />
+					<a href="http://CSmore.info/on/wallet">http://CSmore.info/on/wallet</a>
+				</section>
+				
+				<section data-background-image="presentation/assets/image/Bubbles.jpg" data-background-opacity="0.4">
+					<h3>Who Am I?  What Am I Doing Here?</h3>
+					<div class="container">
+						<div class="col">
+							<table class="whoami">
+								<tr>
+									<td><a href="https://csmore.info"><img src="../WebsiteAssets/Logo.png" height="100" /></a></td>
+									<td nowrap><a href="https://csmore.info">Catallaxy Services</a></td>
+								</tr>
+								<tr>
+									<td><a href="https://curatedsql.com"><img src="../WebsiteAssets/CuratedSQLLogo.png" height="100" /></a></td>
+									<td nowrap><a href="https://curatedsql.com">Curated SQL</a></td>
+								</tr>
+								<tr>
+									<td><a href="https://www.apress.com/us/book/9781484254608"><img src="../WebsiteAssets/PolyBaseRevealed.png" height="120" /></a></td>
+									<td nowrap><a href="https://www.apress.com/us/book/9781484254608">PolyBase Revealed</a></td>
+								</tr>
+							</table>
+						</div>
+						<div class="col">
+							<a href="http://www.twitter.com/feaselkl"><img src="../WebsiteAssets/HeadShot.jpg" height="358" width="315" /></a>
+							<br />
+							<a href="http://www.twitter.com/feaselkl">@feaselkl</a>
+						</div>					
+					</div>
+				</section>
+				
+				<section data-background-image="presentation/assets/background/motivation.jpg" data-background-opacity="0.2">
+					<h3>Motivation</h3>
+					
+					<p>Today's talk will introduce you to "the cloud" and provide an introduction to one cloud:  Microsoft Azure.</p>
+
+					<p>We will review key concepts around whether the cloud makes sense, hiring for the cloud, pricing in the cloud, and review several cloud workloads.</p>
+				</section>
+				
+				<section data-background-image="presentation/assets/background/stoplight.jpg" data-background-opacity="0.2">
+					<h3>A Quick Note</h3>
+					
+					<p>This talk is a companion talk to Getting Stuck in the Cloud (<a href="https://csmore.info/on/thecloud">https://csmore.info/on/thecloud</a>), where I provide an introduction to cloud terminology and offerings.</p>
+					
+					<p>This talk assumes you are familiar with key cloud concepts like IaaS/PaaS/SaaS and have some idea of the Azure ecosystem.</p>
+				</section>
+				
+				<section data-background-image="presentation/assets/image/Bubbles.jpg" data-background-opacity="0.4">
+					<h3>Agenda</h3>
+					
+					<ol>
+						<li class="active">Pricing in the Cloud</li>
+						<li>How Much Will My Stuff Cost?</li>
+						<li>Saving Money in the Cloud</li>
+						<li>Scalable Web Application</li>
+						<li>Microservices with AKS</li>
+						<li>Budgeting and Alerting</li>
+					</ol>
+				</section>
+				
+				<section data-background-image="presentation/assets/background/cash-register.jpg" data-background-opacity="0.2">
+					<h3>The Billing Model</h3>
+					
+					<p>Cloud providers generally use a pay-for-use model with monthly billing.</p>
+
+					<p>With the move from rented virtual machines (IaaS) to platform services (PaaS) to serverless/functional applications, this is looking more and more like mainframe pricing during the 1970s and 1980s.</p>
+				</section>
+				
+				<section data-background-image="presentation/assets/background/coins2.jpg" data-background-opacity="0.2">
+					<h3>The Billing Model</h3>
+					
+					<p>The pay-for-use model is an <strong>Operating Expenditures</strong> (OpEx) billing model.</p>
+					
+					<p>On-premises hosting is typically financed via <strong>Capital Expenditures</strong> (CapEx).</p>
+				</section>
+				
+				<section data-background-image="presentation/assets/background/muay-thai.jpg" data-background-opacity="0.2">
+					<h3>A Finance Fight!</h3>
+					
+					<table style="font-size:smaller">
+						<thead>
+							<tr>
+								<th>Criterion</th>
+								<th>CapEx</th>
+								<th>OpEx</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Intent</td>
+								<td>Buying a fixed asset</td>
+								<td>Daily operating expenses</td>
+							</tr>
+							<tr>
+								<td>Longevity</td>
+								<td>Measured in years (at least 1 tax year)</td>
+								<td>"Day-to-day" expenses (in 1 tax year)</td>
+							</tr>
+							<tr>
+								<td>Depreciation / Amortization</td>
+								<td>Draw down X% of the total cost each year of "useful life"</td>
+								<td>No amortization allowed</td>
+							</tr>
+							<tr>
+								<td>Budgeting</td>
+								<td>Typically requires negotiation and long-term planning</td>
+								<td>Easier for single decision-maker to budget</td>
+							</tr>
+							<tr>
+								<td>EBIDTA</td>
+								<td>No negative impact</td>
+								<td>May have negative impact</td>
+							</tr>
+						</tbody>
+					</table>
+				</section>
+				
+				<section data-background-image="presentation/assets/background/coins-stacked.jpg" data-background-opacity="0.2">
+					<h3>Summarizing CapEx vs OpEx</h3>
+					
+					<p>CapEx tends to be harder to push through, and can be a risk if the hardware you purchase becomes insufficient for the job before its depreciation period (typically 5 years) expires.  CapEx is more "fixed expenditure" but gets removed when calculating EBIDTA (and C-levels like that!).</p>
+					
+					<p>OpEx is easier for a single business decision-maker (like a CIO) to approve and spending is much more flexible.  It does count against EBIDTA, however.</p>
+				</section>
+				
+				<section data-background-image="presentation/assets/background/price.jpg" data-background-opacity="0.2">
+					<h3>The Cost of Everything</h3>
+					
+					<p>With cloud providers, almost everything has a price.</p>
+					
+					<ul>
+						<li>Data ingress?  Usually <strong>free</strong></li>
+						<li>Data egress?  <strong>Pay</strong></li>
+						<li>Data storage?  <strong>Pay</strong></li>
+						<li>Compute?  <strong>Pay</strong></li>
+						<li>Network utilization?  <strong>Pay</strong></li>
+						<li>High availability?  <strong>Pay</strong></li>
+						<li>Faster performance?  <strong>Pay</strong></li>
+						<li>Running a dev or test solution?  <strong>Pay*</strong></li>
+					</ul>
+					
+					<p>That said, some services are free or have free tiers.</p>
+				</section>
+				
+				<section data-background-image="presentation/assets/background/abacus.jpg" data-background-opacity="0.2">
+					<h3>The Calculator</h3>
+					
+					<p>Azure has <a href="https://azure.microsoft.com/en-us/pricing/calculator/">a fully-featured pricing calculator</a>.</p>
+					
+					<img src="presentation/assets/image/pricing-calculator.jpg" height="450" />
+				</section>
+				
+				<section data-background-image="presentation/assets/background/skeleton-thinking.jpg" data-background-opacity="0.2">
+					<h3>Points of Confusion around Pricing</h3>
+					
+					<p><strong>1) Complexity with the Pricing Calculator</strong></p>
+					
+					<p>One common complaint about cloud pricing calculators (not just Azure's!) is the complexity.</p>
+
+					<p>Another is that pricing terminology changes between services.</p>
+					
+					<p>If you are new to Azure or to a particular Azure service, you will likely underestimate the actual cost.</p>
+				</section>
+				
+				<section data-background-image="presentation/assets/image/Bubbles.jpg" data-background-opacity="0.4">
+					<h3>The Calculator -- Azure Synapse Analytics</h3>
+					
+					<img src="presentation/assets/image/synapse-1.jpg" height="500" />
+				</section>
+				
+				<section data-background-image="presentation/assets/image/Bubbles.jpg" data-background-opacity="0.4">
+					<h3>The Calculator -- Azure Synapse Analytics</h3>
+					
+					<img src="presentation/assets/image/synapse-2.jpg" />
+				</section>
+				
+				<section data-background-image="presentation/assets/image/Bubbles.jpg" data-background-opacity="0.4">
+					<h3>The Calculator -- Azure Synapse Analytics</h3>
+					
+					<img src="presentation/assets/image/synapse-3.jpg" height="500" />
+				</section>
+				
+				<section data-background-image="presentation/assets/image/Bubbles.jpg" data-background-opacity="0.4">
+					<h3>The Calculator -- Azure Synapse Analytics</h3>
+					
+					<img src="presentation/assets/image/synapse-4.jpg" />
+				</section>
+				
+				<section data-background-image="presentation/assets/image/Bubbles.jpg" data-background-opacity="0.4">
+					<h3>The Calculator -- Azure Synapse Analytics</h3>
+					
+					<img src="presentation/assets/image/synapse-5.jpg" />
+				</section>
+				
+				<section data-background-image="presentation/assets/image/Bubbles.jpg" data-background-opacity="0.4">
+					<h3>The Calculator -- Azure Synapse Analytics</h3>
+					
+					<img src="presentation/assets/image/synapse-6.jpg" height="500" />
+				</section>
+				
+				<section data-background-image="presentation/assets/image/Bubbles.jpg" data-background-opacity="0.4">
+					<h3>The Calculator -- Azure Synapse Analytics</h3>
+					
+					<img src="presentation/assets/image/synapse-7.jpg" />
+				</section>
+				
+				<section data-background-image="presentation/assets/background/rulers.jpg" data-background-opacity="0.2">
+					<h3>Points of Confusion around Pricing</h3>
+					
+					<p><strong>2) Tiers, SKUs, and More</strong></p>
+					
+					<p>Each offering in Azure tends to have multiple tiers.  The terms "Basic," "Standard," and "Premium" give you an idea of relative quality, but what they provide can differ drastically between services.</p>
+					
+					<p>For an example of the extreme, there's Azure SQL Database...</p>
+				</section>
+				
+				<section data-background-image="presentation/assets/background/Variety.jpg" data-background-opacity="0.2">
+					<h3>Azure SQL Database Service Tiers</h3>
+					
+					<ul>
+						<li>DTU Model
+							<ul>
+								<li>Basic</li>
+								<li>Standard</li>
+								<li>Premium</li>
+							</ul>
+						</li>
+						<li>vCore Model
+							<ul>
+								<li>General Purpose</li>
+								<li>Business Critical</li>
+								<li>Hyperscale</li>
+							</ul>
+						</li>
+						<li>Serverless</li>
+					</ul>
+				</section>
+				
+				<section data-background-image="presentation/assets/background/pears.jpg" data-background-opacity="0.2">
+					<h3>Points of Confusion around Pricing</h3>
+					
+					<p><strong>3) Cross-product Variants</strong></p>
+					
+					<p>Do you want a Spark cluster?  Take your choice:</p>
+					
+					<ul>
+						<li>Azure HDInsight</li>
+						<li>Azure Databricks</li>
+						<li>Azure Synapse Analytics</li>
+						<li>SQL Server Big Data Clusters</li>
+						<li>Build it with VMs</li>
+						<li>Build it with containers on Azure Kubernetes Service</li>
+						<li>Build it in Azure Machine Learning</li>
+						<li>Maybe something else too?</li>
+					</ul>
+				</section>
+				
+				<section data-background-image="presentation/assets/image/Bubbles.jpg" data-background-opacity="0.4">
+					<h3>Agenda</h3>
+					
+					<ol>
+						<li>Pricing in the Cloud</li>
+						<li class="active">How Much Will My Stuff Cost?</li>
+						<li>Saving Money in the Cloud</li>
+						<li>Budgeting and Alerting</li>
+						<li>Scalable Web Application</li>
+						<li>Microservices with AKS</li>
+					</ol>
+				</section>
+				
+				<section data-background-image="presentation/assets/background/calculator.jpg" data-background-opacity="0.2">
+					<h3>Diving into the Pricing Calculator</h3>
+					
+					<p>The Azure Pricing Calculator is available at <a href="https://azure.microsoft.com/en-us/pricing/calculator/">https://azure.microsoft.com/en-us/pricing/calculator/</a>.</p>
+					
+					<p>Although it can be confusing, let's take a look at it in a bit more detail.</p>
+				</section>
+				
+				<section data-background-image="presentation/assets/background/demo.jpg" data-background-opacity="0.2">
+					<h3>Demo Time</h3>
+				</section>
+				
+				<section data-background-image="presentation/assets/background/bill.jpg" data-background-opacity="0.2">
+					<h3>Outside the Calculator</h3>
+					
+					<p>Note that licensing for things such as the Power Platform (Power Apps, Power Automate, Power BI, etc.) is outside the scope of the pricing calculator.  You will need to track that separately.</p>
+					
+					<p>Also, for items which are in public or private preview, there is no calculator information, even if the service itself has pricing details laid out.</p>
+				</section>
+				
+				<section data-background-image="presentation/assets/background/checklist.jpg" data-background-opacity="0.2">
+					<h3>Maximizing the Calculator's Value</h3>
+					
+					<p>Given its complexity, the calculator works best when you have a good idea of your service requirements, including CPU, memory, and disk requirements.  This is quite different from "What I have on my on-premises server"!</p>
+					
+					<p>Migration assistants can help you get some of that understanding.</p>
+				</section>
+				
+				<section data-background-image="presentation/assets/image/Bubbles.jpg" data-background-opacity="0.4">
+					<h3>SQL Server Data Migration Assistant</h3>
+					
+					<p>The Data Migration Assistant allows you to check compatibility issues which might impact database functionality when moving to a new version of SQL Server or to Azure SQL Database.</p>
+					
+					<p>This isn't necessarily a cost-savings tool, but will give you an idea of what you might need to change before migrating.</p>
+				</section>
+				
+				<section data-background-image="presentation/assets/image/Bubbles.jpg" data-background-opacity="0.4">
+					<h3>Azure Migrate</h3>
+					
+					<p>The Azure Migrate tool provides a variety of assessments for services, such as Azure SQL Database, VMs, App Services, and more.  These figure out your existing resource requirements based on workload and provide you recommendations on tiers and performance levels.</p>
+					
+					<p>This helps you come in at a reasonable price without experiencing massive performance problems or unnecessary expenditure on servers which sit mostly idle.</p>
+				</section>
+				
+				<section data-background-image="presentation/assets/background/dollars.jpg" data-background-opacity="0.2">
+					<h3>The Cost of Migration</h3>
+					
+					<p>Don't forget that migrations cost money!  <a href="https://www.scnsoft.com/services/application/migration/azure">ScienceSoft estimates the cost of an app migration to Azure</a> as ranging from $5-15K (small app) up to 500K or more (large app).</p>
+					
+					<p>Even if you perform the migration in-house, that cost includes the opportunity cost of having staff work on other projects.</p>
+				</section>
+				
+				<section data-background-image="presentation/assets/background/monkey-thinking.jpg" data-background-opacity="0.2">
+					<h3>Is This Really Cheaper than On-Prem?</h3>
+					
+					<p>It depends!</p>
+					
+					<ul>
+						<li>If your data center is really expensive, public cloud is probably cheaper</li>
+						<li>If you have extreme hardware requirements, then probably not (and they may not have appropriate offerings)</li>
+						<li>If you simply lift-and-shift, it's almost definitely more expensive in the cloud</li>
+						<li>If you have data in multiple geographical regions, moving to a public cloud is often cheaper</li>
+						<li>Even if it is cheaper, it takes time and effort to optimize your apps for the way the cloud works!</li>
+					</ul>
+				</section>
+				
+				<section data-background-image="presentation/assets/image/Bubbles.jpg" data-background-opacity="0.4">
+					<h3>Agenda</h3>
+					
+					<ol>
+						<li>Pricing in the Cloud</li>
+						<li>How Much Will My Stuff Cost?</li>
+						<li class="active">Saving Money in the Cloud</li>
+						<li>Scalable Web Application</li>
+						<li>Microservices with AKS</li>
+						<li>Budgeting and Alerting</li>
+					</ol>
+				</section>
+				
+				<section data-background-image="presentation/assets/background/model.jpg" data-background-opacity="0.2">
+					<h3>Reserved Capacity</h3>
+					
+					<p>Azure typically offers three separate models for pricing:  pay-as-you-go (PayGo), one-year reserved, and three-year reserved.  Typically, 1-year reserved is 30-40% less expensive than PayGo and 3-year reserved is 50-70% less expensive.</p>
+				</section>
+				
+				<section data-background-image="presentation/assets/background/calendar.jpg" data-background-opacity="0.2">
+					<h3>Reserved Capacity</h3>
+					
+					<p>When would I choose <strong>PayGo</strong>?</p>
+					
+					<ul>
+						<li>If you use a service less than 30-40% of the time and can have it off the rest of the time.</li>
+						<li>If you just want to try out a service, start as PayGo and decide if you want to reserve later.</li>
+						<li>If you want the lowest upfront price, PayGo has no "down payments."</li>
+						<li>If you can fit everything into a very inexpensive tier, PayGo might be <strong>cheaper</strong> than reserved instances, especially for things like Azure Blob Storage.</li>
+					</ul>
+				</section>
+				
+				<section data-background-image="presentation/assets/background/contract.jpg" data-background-opacity="0.2">
+					<h3>Reserved Capacity</h3>
+
+					<p>When would I choose <strong>3-year reserved</strong>?</p>
+					
+					<ul>
+						<li>If you constantly use a service (the closer to 100% uptime, the better) and are willing to make a 3-year commitment.</li>
+						<li>3-year reservations can be amortized as CapEx, unlike PayGo or 1-year reservations.</li>
+					</ul>
+				</section>
+				
+				<section data-background-image="presentation/assets/background/contract2.jpg" data-background-opacity="0.2">
+					<h3>Reserved Capacity</h3>
+
+					<p>When would I choose <strong>1-year reserved</strong>?</p>
+					
+					<ul>
+						<li>1-year reservations tend to be the best trade-off between hardware flexibility and price savings.</li>
+						<li>VM prices tend to drop over time, meaning it may actually be cheaper to take three 1-year reservations than one 3-year reservation!</li>
+					</ul>
+				</section>
+				
+				<section data-background-image="presentation/assets/background/mixture.jpg" data-background-opacity="0.2">
+					<h3>Hybrid Benefit</h3>
+					
+					<p>Azure Hybrid Benefit allows you to use on-premises, licensed versions of certain software in Azure.  This includes Windows, SQL Server, and RedHat &amp; SUSE Linux.</p>
+					
+					<p>With SQL Server in particular, you can use Hybrid Benefit to migrate to Azure VMs in IaaS as well as Azure SQL Database and Azure SQL Managed Instance.</p>
+					
+					<p>You cannot use the same license on-prem or in the cloud, though there is a 180-day "concurrent use" right to help with migration.</p>
+				</section>
+				
+				<section data-background-image="presentation/assets/background/crt.jpg" data-background-opacity="0.2">
+					<h3>Dev/Test Subscriptions</h3>
+					
+					<p>For development and testing workloads, you can create a Dev/Test subscription as part of your Visual Studio subscription.</p>
+					
+					<p>With Dev/Test pricing, licensing costs are removed.  This makes Windows VMs as inexpensive as CentOS or Ubuntu Linux VMs, removes licensing costs for Azure SQL Database, and provides discounts for services like Azure App Services.</p>
+					
+					<p>This is, of course, only for development or test environments, <strong>not</strong> for production.</p>
+				</section>
+				
+				<section data-background-image="presentation/assets/image/Bubbles.jpg" data-background-opacity="0.4">
+					<h3>Free and Development-Grade Tiers</h3>
+					
+					<p>Certain services have Free tiers, which works well for low-use development environments.  For example, IoT Hub has a Free tier which allows you to send up to 8000 messages per day.</p>
+					
+					<p>Even for services lacking Free tiers, there are often significant price differences between Premium and Standard tiers, and for many services, the key differences are in things like High Availability and SLAs rather than differences in the development surface area.</p>
+				</section>
+				
+				<section data-background-image="presentation/assets/background/scale2.jpg" data-background-opacity="0.2">
+					<h3>Scaling Down</h3>
+					
+					<p>Scaling down works well in dev environments as well as "9-5" scenarios where there most of the traffic happens during a small stretch of time during the day.</p>
+					
+					<p>At the extreme, you can shut down services like Azure Synapse Analytics dedicated SQL pools and only pay for storage.  This can reduce the cost during off hours by 80-90% depending on your storage requirements.</p>
+					
+					<p>More commonly, you can't shut off a service because it needs to be available 24/7, but can scale down overnight.</p>
+				</section>
+				
+				<section data-background-image="presentation/assets/background/surfer-crash.jpg" data-background-opacity="0.2">
+					<h3>Scaling Down -- The Downsides</h3>
+					
+					<p>Scale-down takes time and can frequently cause downtime while it scales down.  Scale-down works best with applications and worst with databases.</p>
+					
+					<p>You may also be at the minimum for scaling--you don't want to change tiers when scaling, moving from Premium to Standard.  Even for services where that is possible, it's typically a bad idea which causes a lot of downtime.</p>
+					
+					<p>Scale-down is typically not the best solution!</p>
+				</section>
+				
+				<section data-background-image="presentation/assets/background/clouds.jpg" data-background-opacity="0.2">
+					<h3>"Cloud Native" Development</h3>
+					
+					<p>"Cloud Native" development is the secret to a cheaper cloud experience.  It includes:</p>
+					
+					<ul>
+						<li>Microservices</li>
+						<li>Event-driven development</li>
+						<li>Pushing resources to the limit</li>
+						<li>Hunting down technical debt</li>
+						<li>Reducing dependence on virtual machines</li>
+					</ul>
+				</section>
+				
+				<section data-background-image="presentation/assets/background/cleaning.jpg" data-background-opacity="0.2">
+					<h3>Microservice Architecture</h3>
+					
+					<p>Microservices are small, independent, constrainted services.  They receive information, do one key thing, and possibly output results.</p>
+					
+					<p>Microservices can run on small VMs or containers, and you can sometimes host multiple microservices on the same instance.</p>
+				</section>
+				
+				<section data-background-image="presentation/assets/background/pipes.jpg" data-background-opacity="0.2">
+					<h3>Event-Driven Development</h3>
+					
+					<p>Along with microservices, we want to use event-driven development.  Microservices receive information as events, and handle these requests on an as-received basis.</p>
+					
+					<p>Typically, we want to use queues to handle this message-passing.  This allows us to keep services independent and scale them independently.  Furthermore, if we don't need immediate responses, we could even shut off services overnight and messages can remain in the queue.</p>
+				</section>
+				
+				<section data-background-image="presentation/assets/background/overhead-city.jpg" data-background-opacity="0.2">
+					<h3>Minimal Overhead</h3>
+					
+					<p>We typically over-allocate resources for on-premises VMs, as it's difficult to scale them up once created.  We might have servers running on 10-20% CPU or using less than half of the allocated RAM.</p>
+					
+					<p>In the cloud, we want to push closer to 65-75%.  We don't want 100% utilization (because then the server is just spinning) but we're paying for unused resources.  If you do need to scale up resources, it's typically easy to do this in the cloud--at least with applications.</p>
+				</section>
+
+				<section data-background-image="presentation/assets/background/hunt.jpg" data-background-opacity="0.2">
+					<h3>Aggressively Hunting Technical Debt</h3>
+					
+					<p>It can be difficult to get the business side to let you fix technical debt because it's hard to quantify the benefit behind it.</p>
+					
+					<p>In the cloud, certain types of technical debt are easy to classify:  if it lets you scale down services or reduce the number of servers running, you have a direct measure of benefit:  lower Azure costs!</p>
+				</section>
+				
+				<section data-background-image="presentation/assets/background/server-rack.jpg" data-background-opacity="0.2">
+					<h3>Reducing Dependence on Virtual Machines</h3>
+					
+					<p>"Lift-and-shift" strategies are common for getting into the cloud, as it's easy to move virtual machines from on-premises servers into Azure.  This strategy is, however, rather expensive:  it's typically cheaper to host all of those VMs locally, especially for larger companies.</p>
+					
+					<p>The most price-effective services tend to be efficient platform-as-a-service and function-as-a-service offerings like Azure Blob Storage, Event Hubs, App Services, and Azure Functions.</p>
+				</section>
+				
+				<section data-background-image="presentation/assets/background/server-room.jpg" data-background-opacity="0.2">
+					<h3>This is NOT Your On-Prem Solution!</h3>
+					
+					<p>Most likely, your on-premises solutions don't look anything like what I've described--though if they do look like this, you're probably a good candidate for Azure!</p>
+					
+					<p>This doesn't mean "Don't move to the cloud," but it does indicate that you'll want to reshape services over time and plan migrations.</p>
+				</section>
+				
+				<section data-background-image="presentation/assets/background/thinking-emoji.jpg" data-background-opacity="0.2">
+					<h3>The Secret to a Cheaper Cloud Experience</h3>
+
+					<p>How do we get there from here?</p>
+					
+					<ul>
+						<li>Take smaller product offerings and move them up first</li>
+						<li>Perform ruthless technical debt cleanup
+							<ul>
+								<li>Remove external dependencies</li>
+								<li>Change access patterns--interact through an API</li>
+								<li>Optimize code performance and database performance</li>
+								<li>Minimize network bandwidth utilization</li>
+							</ul>
+						</li>
+						<li>Study up on cloud architectures; they're not the same as what works on-premises</li>
+					</ul>
+				</section>
+				
+				<section data-background-image="presentation/assets/image/Bubbles.jpg" data-background-opacity="0.4">
+					<h3>Agenda</h3>
+					
+					<ol>
+						<li>Pricing in the Cloud</li>
+						<li>How Much Will My Stuff Cost?</li>
+						<li>Saving Money in the Cloud</li>
+						<li class="active">Scalable Web Application</li>
+						<li>Microservices with AKS</li>
+						<li>Budgeting and Alerting</li>
+					</ol>
+				</section>
+				
+				<section data-background-image="presentation/assets/image/Bubbles.jpg" data-background-opacity="0.4">
+					<h3>Scalable Web Application</h3>
+					
+					<img src="presentation/assets/image/scalable-web-app.png" height="500" />
+				</section>
+				
+				<section data-background-image="presentation/assets/background/scale.jpg" data-background-opacity="0.2">
+					<h3>Saving Money</h3>
+
+					<p>Can we save money over this design?</p>
+					
+					<ul>
+						<li>Cache heavily</li>
+						<li>CDNs are cheap--use them!</li>
+						<li>Scale if you experience bursty behavior</li>
+						<li>Prefer well-designed, fast functions</li>
+						<li>Look for service overlap:  Azure Front Door Standard & Premium include a CDN plus a WAF.</li>
+						<li>Remove Azure Search + Cosmos or SQL</li>
+					</ul>
+				</section>
+				
+				<section data-background-image="presentation/assets/background/demo.jpg" data-background-opacity="0.2">
+					<h3>Demo Time</h3>
+				</section>
+				
+				<section data-background-image="presentation/assets/image/Bubbles.jpg" data-background-opacity="0.4">
+					<h3>Agenda</h3>
+					
+					<ol>
+						<li>Pricing in the Cloud</li>
+						<li>How Much Will My Stuff Cost?</li>
+						<li>Saving Money in the Cloud</li>
+						<li>Scalable Web Application</li>
+						<li class="active">Microservices with AKS</li>
+						<li>Budgeting and Alerting</li>
+					</ol>
+				</section>
+
+				<section data-background-image="presentation/assets/image/Bubbles.jpg" data-background-opacity="0.4">
+					<h3>Microservices with AKS</h3>
+					
+					<img src="presentation/assets/image/aks.png" height="500" />
+				</section>
+				
+				<section data-background-image="presentation/assets/background/nesting-pots.jpg" data-background-opacity="0.2">
+					<h3>Saving Money</h3>
+
+					<p>Can we save money over this design?</p>
+					
+					<ul>
+						<li>Use Azure Container Instances for dev and test</li>
+						<li>For fairly simple apps, use App Services instead</li>
+						<li>Use the same Kubernetes cluster to deploy several microservices</li>
+						<li>Reduce VM size for Kubernetes cluster</li>
+					</ul>
+				</section>
+				
+				<section data-background-image="presentation/assets/background/demo.jpg" data-background-opacity="0.2">
+					<h3>Demo Time</h3>
+				</section>
+				
+				<section data-background-image="presentation/assets/image/Bubbles.jpg" data-background-opacity="0.4">
+					<h3>Agenda</h3>
+					
+					<ol>
+						<li>Pricing in the Cloud</li>
+						<li>How Much Will My Stuff Cost?</li>
+						<li>Saving Money in the Cloud</li>
+						<li>Scalable Web Application</li>
+						<li>Microservices with AKS</li>
+						<li class="active">Budgeting and Alerting</li>
+					</ol>
+				</section>
+				
+				<section data-background-image="presentation/assets/image/Bubbles.jpg" data-background-opacity="0.4">
+					<h3>Create a Budget</h3>
+					
+					<p>Budgets let us know when we reach a certain level of spend.</p>
+
+					<img src="presentation/assets/image/create-budget.png" height="400" />
+				</section>
+				
+				<section data-background-image="presentation/assets/image/Bubbles.jpg" data-background-opacity="0.4">
+					<h3>Create a Budget</h3>
+
+					<img src="presentation/assets/image/budget.png" height="500" />
+				</section>
+				
+				<section data-background-image="presentation/assets/image/Bubbles.jpg" data-background-opacity="0.4">
+					<h3>Create Cost Alerts</h3>
+					
+					<p>Cost alerts send messages when you get close to or above budget.</p>
+
+					<img src="presentation/assets/image/create-alert.png" height="400" />
+				</section>
+				
+				<section data-background-image="presentation/assets/image/Bubbles.jpg" data-background-opacity="0.4">
+					<h3>Create Cost Alerts</h3>
+
+					<img src="presentation/assets/image/alert.png" height="500" />
+				</section>
+				
+				<section data-background-image="presentation/assets/image/Bubbles.jpg" data-background-opacity="0.4">
+					<h3>Create Cost Alerts</h3>
+
+					<img src="presentation/assets/image/dept-spending-selected-with-credits.png" height="500" />
+				</section>
+				
+				<section data-background-image="presentation/assets/image/Bubbles.jpg" data-background-opacity="0.4">
+					<h3>Spending Limits</h3>
+
+					<p>If you have an account which uses Azure credits, spending limits are enabled by default to prevent you from owing Azure money beyond your credits.  If you hit the spending limit, <strong>all</strong> services are shut off until the next billing period unless you disable the limit and set up a payment method.</p>
+					
+					<img src="presentation/assets/image/spending-limits.png" />
+					
+					<p>Custom spending limits are not available in Azure.</p>
+				</section>
+				
+				<section data-background-image="presentation/assets/background/tags.jpg" data-background-opacity="0.2">
+					<h3>Tagging and Chargebacks</h3>
+
+					<p>For large companies or multi-client scenarios, chargeback can be important for internal or external accounting.</p>
+					
+					<p>The easiest way to perform chargeback is to tag individual resource groups and resources with the relevant department or customer and to use the Azure Cost Management portal to create reports.</p>
+					
+					<p>Performing chargeback within a resource, such as Azure SQL Database or a VM running SQL Server, is something you would need to control using your own accounting rules and processes.</p>
+				</section>
+
+				<section data-background-image="presentation/assets/background/wrappingup.jpg" data-background-opacity="0.2">
+					<h3>Wrapping Up</h3>
+					
+					<p>In this talk, we looked at the billing model of the cloud, including how it fits in the "OpEx vs CapEx" debate.  We reviewed the Azure pricing calculator and demystified it somewhat.  Then, we looked at strategies to save money in the cloud, using two examples of Azure reference architectures to save up to 60% off the "naive" bill.</p>
+				</section>
+				
+				<section data-background-image="presentation/assets/background/wrappingup.jpg" data-background-opacity="0.2">
+					<h3>Wrapping Up</h3>
+					
+					<p>
+						To learn more, go here:
+						<br />
+						<a href="https://csmore.info/on/wallet">https://CSmore.info/on/wallet</a>
+					</p>
+					<br />
+					<p>
+						And for help, contact me:
+						<br />
+						<a href="mailto:feasel@catallaxyservices.com">feasel@catallaxyservices.com</a> | <a href="https://www.twitter.com/feaselkl">@feaselkl</a>
+					</p>
+					<br />
+					<p>
+						Catallaxy Services consulting:
+						<br />
+						<a href="https://csmore.info/contact">https://CSmore.info/on/contact</a>
+					</p>
+				</section>
+			</div>
+		</div>
+
+		<script src="../reveal.js/dist/reveal.js"></script>
+		<script src="../reveal.js/plugin/zoom/zoom.js"></script>
+		<script src="../reveal.js/plugin/notes/notes.js"></script>
+		<script src="../reveal.js/plugin/search/search.js"></script>
+		<script src="../reveal.js/plugin/markdown/markdown.js"></script>
+		<script src="../reveal.js/plugin/math/math.js"></script>
+		<script src="../reveal.js/plugin/menu/menu.js"></script>
+		<script src="../reveal.js/plugin/highlight/highlight.js"></script>
+		<script src="../reveal.js/plugin/chart/Chart.min.js"></script>
+		<script src="../reveal.js/plugin/chart/plugin.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				width: '70%',
+				controls: true,
+				progress: true,
+				center: true,
+				hash: true,
+				transition: 'fade',
+				
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealZoom, RevealNotes, RevealSearch, RevealMarkdown, RevealHighlight, RevealMath, RevealMenu, RevealChart ]
+			});
+		</script>
+	</body>
+</html>
