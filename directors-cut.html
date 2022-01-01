@@ -31,6 +31,7 @@
 			<div class="slides">
 				<section data-background-image="presentation/assets/image/Bubbles.jpg" data-background-opacity="0.4">
 					<h2>Saving Your Wallet from the Cloud</h2>
+					<h3>Extended Director's Cut</h3>
 					
 					<a href="https://www.catallaxyservices.com">Kevin Feasel</a> (<a href="https://twitter.com/feaselkl">@feaselkl</a>)<br />
 					<a href="http://CSmore.info/on/wallet">http://CSmore.info/on/wallet</a>
@@ -87,6 +88,7 @@
 						<li>How Much Will My Stuff Cost?</li>
 						<li>Saving Money in the Cloud</li>
 						<li>Scalable Web Application</li>
+						<li>Microservices with AKS</li>
 						<li>Budgeting and Alerting</li>
 					</ol>
 				</section>
@@ -182,7 +184,70 @@
 					
 					<img src="presentation/assets/image/pricing-calculator.jpg" height="450" />
 				</section>
+				
+				<section data-background-image="presentation/assets/background/skeleton-thinking.jpg" data-background-opacity="0.2">
+					<h3>Points of Confusion around Pricing</h3>
+					
+					<p><strong>1) Complexity with the Pricing Calculator</strong></p>
+					
+					<p>One common complaint about cloud pricing calculators (not just Azure's!) is the complexity.</p>
 
+					<p>Another is that pricing terminology changes between services.</p>
+					
+					<p>If you are new to Azure or to a particular Azure service, you will likely underestimate the actual cost.</p>
+				</section>
+				
+				<section data-background-image="presentation/assets/background/rulers.jpg" data-background-opacity="0.2">
+					<h3>Points of Confusion around Pricing</h3>
+					
+					<p><strong>2) Tiers, SKUs, and More</strong></p>
+					
+					<p>Each offering in Azure tends to have multiple tiers.  The terms "Basic," "Standard," and "Premium" give you an idea of relative quality, but what they provide can differ drastically between services.</p>
+					
+					<p>For an example of the extreme, there's Azure SQL Database...</p>
+				</section>
+				
+				<section data-background-image="presentation/assets/background/Variety.jpg" data-background-opacity="0.2">
+					<h3>Azure SQL Database Service Tiers</h3>
+					
+					<ul>
+						<li>DTU Model
+							<ul>
+								<li>Basic</li>
+								<li>Standard</li>
+								<li>Premium</li>
+							</ul>
+						</li>
+						<li>vCore Model
+							<ul>
+								<li>General Purpose</li>
+								<li>Business Critical</li>
+								<li>Hyperscale</li>
+							</ul>
+						</li>
+						<li>Serverless</li>
+					</ul>
+				</section>
+				
+				<section data-background-image="presentation/assets/background/pears.jpg" data-background-opacity="0.2">
+					<h3>Points of Confusion around Pricing</h3>
+					
+					<p><strong>3) Cross-product Variants</strong></p>
+					
+					<p>Do you want a Spark cluster?  Take your choice:</p>
+					
+					<ul>
+						<li>Azure HDInsight</li>
+						<li>Azure Databricks</li>
+						<li>Azure Synapse Analytics</li>
+						<li>SQL Server Big Data Clusters</li>
+						<li>Build it with VMs</li>
+						<li>Build it with containers on Azure Kubernetes Service</li>
+						<li>Build it in Azure Machine Learning</li>
+						<li>Maybe something else too?</li>
+					</ul>
+				</section>
+				
 				<section data-background-image="presentation/assets/image/Bubbles.jpg" data-background-opacity="0.4">
 					<h3>Agenda</h3>
 					
@@ -190,8 +255,9 @@
 						<li>Pricing in the Cloud</li>
 						<li class="active">How Much Will My Stuff Cost?</li>
 						<li>Saving Money in the Cloud</li>
-						<li>Scalable Web Application</li>
 						<li>Budgeting and Alerting</li>
+						<li>Scalable Web Application</li>
+						<li>Microservices with AKS</li>
 					</ol>
 				</section>
 				
@@ -209,6 +275,30 @@
 					<p>Note that licensing for things such as the Power Platform (Power Apps, Power Automate, Power BI, etc.) is outside the scope of the pricing calculator.  You will need to track that separately.</p>
 					
 					<p>Also, for items which are in public or private preview, there is no calculator information, even if the service itself has pricing details laid out.</p>
+				</section>
+				
+				<section data-background-image="presentation/assets/background/checklist.jpg" data-background-opacity="0.2">
+					<h3>Maximizing the Calculator's Value</h3>
+					
+					<p>Given its complexity, the calculator works best when you have a good idea of your service requirements, including CPU, memory, and disk requirements.  This is quite different from "What I have on my on-premises server"!</p>
+					
+					<p>Migration assistants can help you get some of that understanding.</p>
+				</section>
+				
+				<section data-background-image="presentation/assets/image/Bubbles.jpg" data-background-opacity="0.4">
+					<h3>SQL Server Data Migration Assistant</h3>
+					
+					<p>The Data Migration Assistant allows you to check compatibility issues which might impact database functionality when moving to a new version of SQL Server or to Azure SQL Database.</p>
+					
+					<p>This isn't necessarily a cost-savings tool, but will give you an idea of what you might need to change before migrating.</p>
+				</section>
+				
+				<section data-background-image="presentation/assets/image/Bubbles.jpg" data-background-opacity="0.4">
+					<h3>Azure Migrate</h3>
+					
+					<p>The Azure Migrate tool provides a variety of assessments for services, such as Azure SQL Database, VMs, App Services, and more.  These figure out your existing resource requirements based on workload and provide you recommendations on tiers and performance levels.</p>
+					
+					<p>This helps you come in at a reasonable price without experiencing massive performance problems or unnecessary expenditure on servers which sit mostly idle.</p>
 				</section>
 				
 				<section data-background-image="presentation/assets/background/dollars.jpg" data-background-opacity="0.2">
@@ -241,6 +331,7 @@
 						<li>How Much Will My Stuff Cost?</li>
 						<li class="active">Saving Money in the Cloud</li>
 						<li>Scalable Web Application</li>
+						<li>Microservices with AKS</li>
 						<li>Budgeting and Alerting</li>
 					</ol>
 				</section>
@@ -423,6 +514,7 @@
 						<li>How Much Will My Stuff Cost?</li>
 						<li>Saving Money in the Cloud</li>
 						<li class="active">Scalable Web Application</li>
+						<li>Microservices with AKS</li>
 						<li>Budgeting and Alerting</li>
 					</ol>
 				</section>
@@ -451,7 +543,7 @@
 						<li>Remove Azure Search + Cosmos or SQL</li>
 					</ul>
 				</section>
-
+				
 				<section data-background-image="presentation/assets/image/Bubbles.jpg" data-background-opacity="0.4">
 					<h3>Agenda</h3>
 					
@@ -460,6 +552,43 @@
 						<li>How Much Will My Stuff Cost?</li>
 						<li>Saving Money in the Cloud</li>
 						<li>Scalable Web Application</li>
+						<li class="active">Microservices with AKS</li>
+						<li>Budgeting and Alerting</li>
+					</ol>
+				</section>
+
+				<section data-background-image="presentation/assets/image/Bubbles.jpg" data-background-opacity="0.4">
+					<h3>Microservices with AKS</h3>
+					
+					<img src="presentation/assets/image/aks.png" height="500" />
+				</section>
+				
+				<section data-background-image="presentation/assets/background/demo.jpg" data-background-opacity="0.2">
+					<h3>Demo Time</h3>
+				</section>
+				
+				<section data-background-image="presentation/assets/background/nesting-pots.jpg" data-background-opacity="0.2">
+					<h3>Saving Money</h3>
+
+					<p>Summarizing how we can save money:</p>
+					
+					<ul>
+						<li>Use Azure Container Instances for dev and test</li>
+						<li>For fairly simple apps, use App Services instead</li>
+						<li>Use the same Kubernetes cluster to deploy several microservices</li>
+						<li>Reduce VM size for Kubernetes cluster</li>
+					</ul>
+				</section>
+				
+				<section data-background-image="presentation/assets/image/Bubbles.jpg" data-background-opacity="0.4">
+					<h3>Agenda</h3>
+					
+					<ol>
+						<li>Pricing in the Cloud</li>
+						<li>How Much Will My Stuff Cost?</li>
+						<li>Saving Money in the Cloud</li>
+						<li>Scalable Web Application</li>
+						<li>Microservices with AKS</li>
 						<li class="active">Budgeting and Alerting</li>
 					</ol>
 				</section>
