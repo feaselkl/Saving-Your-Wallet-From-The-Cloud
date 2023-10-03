@@ -68,7 +68,7 @@
 					
 					<p>Today's talk will give you an idea of the cloud pricing model, using Microsoft Azure for examples.</p>
 
-					<p>We will get an idea of how much services may cost, look at ways to save money in the cloud, try it out on a couple reference architectures, and review budgeting and cost alerting options in Azuref.</p>
+					<p>We will get an idea of how much services may cost, look at ways to save money in the cloud, try it out on a reference architecture, and review budgeting and cost alerting options in Azure.</p>
 				</section>
 				
 				<section data-background-image="presentation/assets/background/stoplight.jpg" data-background-opacity="0.2">
@@ -126,7 +126,7 @@
 							</tr>
 							<tr>
 								<td>Longevity</td>
-								<td>Measured in years (at least 1 tax year)</td>
+								<td>Measured in years (multiple tax years)</td>
 								<td>"Day-to-day" expenses (in 1 tax year)</td>
 							</tr>
 							<tr>
@@ -151,7 +151,7 @@
 				<section data-background-image="presentation/assets/background/coins-stacked.jpg" data-background-opacity="0.2">
 					<h3>Summarizing CapEx vs OpEx</h3>
 					
-					<p>CapEx tends to be harder to push through, and can be a risk if the hardware you purchase becomes insufficient for the job before its depreciation period (typically 5 years) expires.  CapEx is more "fixed expenditure" but gets removed when calculating EBIDTA (and C-levels like that!).</p>
+					<p>CapEx tends to be harder to push through and can be a risk if the hardware you purchase becomes insufficient for the job before its depreciation period (typically 5 years) expires.  CapEx is more "fixed expenditure" but gets removed when calculating EBIDTA (and C-levels like that!).</p>
 					
 					<p>OpEx is easier for a single business decision-maker (like a CIO) to approve and spending is much more flexible.  It does count against EBIDTA, however.</p>
 				</section>
@@ -174,14 +174,6 @@
 					
 					<p>That said, some services are free or have free tiers.</p>
 				</section>
-				
-				<section data-background-image="presentation/assets/background/abacus.jpg" data-background-opacity="0.2">
-					<h3>The Calculator</h3>
-					
-					<p>Azure has <a href="https://azure.microsoft.com/en-us/pricing/calculator/">a fully-featured pricing calculator</a>.</p>
-					
-					<img src="presentation/assets/image/pricing-calculator.jpg" height="450" />
-				</section>
 
 				<section data-background-image="presentation/assets/image/Bubbles.jpg" data-background-opacity="0.4">
 					<h3>Agenda</h3>
@@ -203,20 +195,36 @@
 					<p>Although it can be confusing, it will be your best bet to understand how much a service will cost you.</p>
 				</section>
 				
+				<section data-background-image="presentation/assets/image/Bubbles.jpg" data-background-opacity="0.4">
+					<h3>Pricing Calculator</h3>
+
+					<img src="presentation/assets/image/pricing-calculator-1.png" height="500" />
+				</section>
+				
+				<section data-background-image="presentation/assets/image/Bubbles.jpg" data-background-opacity="0.4">
+					<h3>Selecting a Product</h3>
+
+					<img src="presentation/assets/image/pricing-calculator-2.png" height="500" />
+				</section>
+				
+				<section data-background-image="presentation/assets/image/Bubbles.jpg" data-background-opacity="0.4">
+					<h3>Filling in Details</h3>
+
+					<img src="presentation/assets/image/pricing-calculator-3.png" height="550" />
+				</section>
+				
+				<section data-background-image="presentation/assets/image/Bubbles.jpg" data-background-opacity="0.4">
+					<h3>Review and Save/Export</h3>
+
+					<img src="presentation/assets/image/pricing-calculator-4.png" height="500" />
+				</section>
+
 				<section data-background-image="presentation/assets/background/bill.jpg" data-background-opacity="0.2">
 					<h3>Outside the Calculator</h3>
 					
 					<p>Note that licensing for things such as the Power Platform (Power Apps, Power Automate, Power BI, etc.) is outside the scope of the pricing calculator.  You will need to track that separately.</p>
 					
 					<p>Also, for items which are in public or private preview, there is no calculator information, even if the service itself has pricing details laid out.</p>
-				</section>
-				
-				<section data-background-image="presentation/assets/background/dollars.jpg" data-background-opacity="0.2">
-					<h3>The Cost of Migration</h3>
-					
-					<p>Don't forget that migrations cost money!  <a href="https://www.scnsoft.com/services/application/migration/azure">ScienceSoft estimates the cost of an app migration to Azure</a> as ranging from $5-15K (small app) up to 500K or more (large app).</p>
-					
-					<p>Even if you perform the migration in-house, that cost includes the opportunity cost of having staff work on other projects.</p>
 				</section>
 				
 				<section data-background-image="presentation/assets/background/monkey-thinking.jpg" data-background-opacity="0.2">
@@ -227,10 +235,50 @@
 					<ul>
 						<li>If your data center is really expensive, public cloud is probably cheaper</li>
 						<li>If you have extreme hardware requirements, then probably not (and they may not have appropriate offerings)</li>
-						<li>If you simply lift-and-shift, it's almost definitely more expensive in the cloud</li>
+						<li>Lift-and-shift is almost definitely more expensive in the cloud</li>
 						<li>If you have data in multiple geographical regions, moving to a public cloud is often cheaper</li>
 						<li>Even if it is cheaper, it takes time and effort to optimize your apps for the way the cloud works!</li>
 					</ul>
+				</section>
+
+				<section data-background-image="presentation/assets/image/Bubbles.jpg" data-background-opacity="0.4">
+					<h3>The Azure Bill</h3>
+					
+					<p>You'll receive a monthly bill from Azure. You can also review this in detail in the Cost Management + Billing blade in Azure.</p>
+					
+					<img src="presentation/assets/image/cost-management-blade.png" height="500" />
+				</section>
+
+				<section data-background-image="presentation/assets/image/Bubbles.jpg" data-background-opacity="0.4">
+					<h3>Reviewing the Bill</h3>
+					
+					<p>You'll receive a monthly bill from Azure. You can also review this in detail in the Cost Management + Billing blade in Azure.</p>
+					
+					<img src="presentation/assets/image/azure-bill.png" height="500" />
+				</section>
+
+				<section data-background-image="presentation/assets/image/Bubbles.jpg" data-background-opacity="0.4">
+					<h3>Cost Management</h3>
+					
+					<p>You'll receive a monthly bill from Azure. You can also review this in detail in the Cost Management + Billing blade in Azure.</p>
+					
+					<img src="presentation/assets/image/cost-management-overview.png" height="500" />
+				</section>
+
+				<section data-background-image="presentation/assets/image/Bubbles.jpg" data-background-opacity="0.4">
+					<h3>Cost Analysis</h3>
+					
+					<p>Azure also provides a daily analysis of costs which you can drill into to learn more about which services are costing you the most money.</p>
+					
+					<img src="presentation/assets/image/cost-analysis.png" height="500" />
+				</section>
+
+				<section data-background-image="presentation/assets/image/Bubbles.jpg" data-background-opacity="0.4">
+					<h3>Cost Advisor Recommendations</h3>
+					
+					<p>Azure can also provide automatic recommendations for saving money.</p>
+					
+					<img src="presentation/assets/image/cost-advisor-recommendations.png" height="500" />
 				</section>
 				
 				<section data-background-image="presentation/assets/image/Bubbles.jpg" data-background-opacity="0.4">
@@ -251,39 +299,12 @@
 					<p>Azure typically offers three separate models for pricing:  pay-as-you-go (PayGo), one-year reserved, and three-year reserved.  Typically, 1-year reserved is 30-40% less expensive than PayGo and 3-year reserved is 50-70% less expensive.</p>
 				</section>
 				
-				<section data-background-image="presentation/assets/background/calendar.jpg" data-background-opacity="0.2">
-					<h3>Reserved Capacity</h3>
-					
-					<p>When would I choose <strong>PayGo</strong>?</p>
-					
-					<ul>
-						<li>If you use a service less than 30-40% of the time and can have it off the rest of the time.</li>
-						<li>If you just want to try out a service, start as PayGo and decide if you want to reserve later.</li>
-						<li>If you want the lowest upfront price, PayGo has no "down payments."</li>
-						<li>If you can fit everything into a very inexpensive tier, PayGo might be <strong>cheaper</strong> than reserved instances, especially for things like Azure Blob Storage.</li>
-					</ul>
-				</section>
-				
 				<section data-background-image="presentation/assets/background/contract.jpg" data-background-opacity="0.2">
 					<h3>Reserved Capacity</h3>
-
-					<p>When would I choose <strong>3-year reserved</strong>?</p>
 					
-					<ul>
-						<li>If you constantly use a service (the closer to 100% uptime, the better) and are willing to make a 3-year commitment.</li>
-						<li>3-year reservations can be amortized as CapEx, unlike PayGo or 1-year reservations.</li>
-					</ul>
-				</section>
-				
-				<section data-background-image="presentation/assets/background/contract2.jpg" data-background-opacity="0.2">
-					<h3>Reserved Capacity</h3>
-
-					<p>When would I choose <strong>1-year reserved</strong>?</p>
-					
-					<ul>
-						<li>1-year reservations tend to be the best trade-off between hardware flexibility and price savings.</li>
-						<li>VM prices tend to drop over time, meaning it may actually be cheaper to take three 1-year reservations than one 3-year reservation!</li>
-					</ul>
+					<p>Choose <strong>PayGo</strong> if you use a service less than 30-40% of the time or want to try out a service.</p>
+					<p>Choose <strong>3-year reserved</strong> if you use a service near 100% of the time, are willing to make a 3-year commitment, and need to amortize the expenditure as CapEx.</p>
+					<p>Choose <strong>1-year reserved</strong> if you use a service near 100% of the time but aren't willing to make a 3-year commitment.</p>
 				</section>
 				
 				<section data-background-image="presentation/assets/background/mixture.jpg" data-background-opacity="0.2">
@@ -329,7 +350,7 @@
 					
 					<p>Scale-down takes time and can frequently cause downtime while it scales down.  Scale-down works best with applications and worst with databases.</p>
 					
-					<p>You may also be at the minimum for scaling--you don't want to change tiers when scaling, moving from Premium to Standard.  Even for services where that is possible, it's typically a bad idea which causes a lot of downtime.</p>
+					<p>You may also be at the minimum for scaling--you don't want to change tiers when scaling, moving from Premium to Standard.  Even for services where that is possible, it's typically a bad idea and can cause significant downtime.</p>
 					
 					<p>Scale-down is typically not the best solution!</p>
 				</section>
@@ -415,6 +436,22 @@
 					</ul>
 				</section>
 				
+				<section data-background-image="presentation/assets/background/documents.jpg" data-background-opacity="0.2">
+					<h3>The Well-Architected Framework</h3>
+
+					<p>Take advantage of the Microsoft Azure Well-Architected Framework (<a href="https://learn.microsoft.com/en-us/azure/well-architected/">https://learn.microsoft.com/en-us/azure/well-architected/</a>).</p>
+					
+					<p>One of the WAF pillars is cost optimization and you can pick up great advice on how to track costs, provision resources appropriately, and get the outcomes you desire at the lowest cost.</p>
+				</section>
+				
+				<section data-background-image="presentation/assets/background/typewriter.jpg" data-background-opacity="0.2">
+					<h3>WAF Assessments</h3>
+
+					<p>Microsoft provides specific Well-Architected Framework assessments (<a href="https://learn.microsoft.com/en-us/assessments/azure-architecture-review/">https://learn.microsoft.com/en-us/assessments/azure-architecture-review/</a>).</p>
+					
+					<p>These are quite detailed and may take multiple people at your company several days to complete, but they will provide a great deal of insight specific to your environment.</p>
+				</section>
+				
 				<section data-background-image="presentation/assets/image/Bubbles.jpg" data-background-opacity="0.4">
 					<h3>Agenda</h3>
 					
@@ -433,8 +470,40 @@
 					<img src="presentation/assets/image/scalable-web-app.png" height="500" />
 				</section>
 				
-				<section data-background-image="presentation/assets/background/demo.jpg" data-background-opacity="0.2">
-					<h3>Demo Time</h3>
+				<section data-background-image="presentation/assets/image/Bubbles.jpg" data-background-opacity="0.4">
+					<h3>Initial Estimate</h3>
+
+					<img src="presentation/assets/image/web-app-initial-1.png" />
+				</section>
+				
+				<section data-background-image="presentation/assets/image/Bubbles.jpg" data-background-opacity="0.4">
+					<h3>Initial Estimate</h3>
+
+					<img src="presentation/assets/image/web-app-initial-2.png" />
+				</section>
+				
+				<section data-background-image="presentation/assets/image/Bubbles.jpg" data-background-opacity="0.4">
+					<h3>Optimized Estimate</h3>
+
+					<img src="presentation/assets/image/web-app-optimized-1.png" />
+				</section>
+				
+				<section data-background-image="presentation/assets/image/Bubbles.jpg" data-background-opacity="0.4">
+					<h3>Optimized Estimate</h3>
+
+					<img src="presentation/assets/image/web-app-optimized-2.png" />
+				</section>
+				
+				<section data-background-image="presentation/assets/image/Bubbles.jpg" data-background-opacity="0.4">
+					<h3>Minimalist Estimate</h3>
+
+					<img src="presentation/assets/image/web-app-minimal-1.png" />
+				</section>
+				
+				<section data-background-image="presentation/assets/image/Bubbles.jpg" data-background-opacity="0.4">
+					<h3>Minimalist Estimate</h3>
+
+					<img src="presentation/assets/image/web-app-minimal-2.png" />
 				</section>
 				
 				<section data-background-image="presentation/assets/background/scale.jpg" data-background-opacity="0.2">
